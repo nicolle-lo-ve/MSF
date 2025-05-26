@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Series Favoritas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Mis Series Favoritas</h1>
+        <button id="add-series-btn">Añadir Nueva Serie</button>
+    </header>
+
+    <main id="series-container">
+        <!-- Las series se agregarán aquí dinámicamente -->
+    </main>
+
+    <!-- Modal para añadir/editar series -->
+    <div id="series-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title">Añadir Nueva Serie</h2>
+            <form id="series-form">
+                <input type="hidden" id="series-id">
+                <div class="form-group">
+                    <label for="title">Título:</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">URL de la imagen:</label>
+                    <input type="url" id="image" required>
+                </div>
+                <div class="form-group">
+                    <label for="platform">Plataforma:</label>
+                    <select id="platform" required>
+                        <option value="">Selecciona una plataforma</option>
+                        <option value="Netflix">Netflix</option>
+                        <option value="Amazon Prime">Amazon Prime</option>
+                        <option value="Disney+">Disney+</option>
+                        <option value="HBO Max">HBO Max</option>
+                        <option value="Apple TV+">Apple TV+</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="year">Año de lanzamiento:</label>
+                    <input type="number" id="year" min="1950" max="2025" required>
+                </div>
+                <div class="form-group">
+                    <label for="genre">Género:</label>
+                    <input type="text" id="genre" required>
+                </div>
+                <div class="form-group">
+                    <label for="isMultiSeason">¿Tiene múltiples temporadas?</label>
+                    <input type="checkbox" id="isMultiSeason">
+                </div>
+                <div class="form-buttons">
+                    <button type="button" id="cancel-btn">Cancelar</button>
+                    <button type="submit" id="save-btn">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación para eliminar -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content confirm">
+            <h2>¿Estás seguro?</h2>
+            <p>Esta acción eliminará la serie permanentemente y no podrá recuperarse.</p>
+            <div class="confirm-buttons">
+                <button id="confirm-cancel">Cancelar</button>
+                <button id="confirm-delete">Borrar de mi lista</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="modelo.js"></script>
+    <script src="vista.js"></script>
+    <script src="controlador.js"></script>
+</body>
+</html>
