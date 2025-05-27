@@ -11,6 +11,12 @@ class VistaSeries {
         this.botonGuardar = document.getElementById('save-btn');
         this.botonConfirmarCancelar = document.getElementById('confirm-cancel');
         this.botonConfirmarEliminar = document.getElementById('confirm-delete');
+        this.botonMiLista = document.querySelector('.nav-link:nth-child(2)');
+        this.botonGeneros = document.getElementById('generos-link');
+        this.botonPlataformas = document.getElementById('plataformas-link');
+        this.botonRecomendar = document.getElementById('hero-add-btn');
+        this.seccionPlataforma = document.getElementById('platform-series');
+        this.botonInicio = document.getElementById('inicio-link');
 
         // Campos del formulario
         this.campoIdSerie = document.getElementById('series-id');
@@ -161,4 +167,168 @@ class VistaSeries {
         this.botonCancelar.addEventListener('click', manejador);
         this.botonConfirmarCancelar.addEventListener('click', manejador);
     }
+
+        // Mostrar géneros disponibles
+    // Modificar el método mostrarGeneros
+    mostrarGeneros(generos) {
+        // Verificar si ya existe el contenedor de géneros
+        let contenedorGeneros = document.querySelector('.generos-container');
+        
+        if (!contenedorGeneros) {
+            contenedorGeneros = document.createElement('div');
+            contenedorGeneros.className = 'generos-container';
+            contenedorGeneros.innerHTML = '<h3 class="section-title">🎭 Géneros</h3>';
+            
+            const listaGeneros = document.createElement('div');
+            listaGeneros.className = 'generos-lista';
+            contenedorGeneros.appendChild(listaGeneros);
+            
+            // Insertar solo si no existe
+            this.contenedorSeries.parentElement.insertBefore(contenedorGeneros, this.contenedorSeries);
+        }
+        
+        // Actualizar la lista de géneros
+        const listaGeneros = contenedorGeneros.querySelector('.generos-lista');
+        listaGeneros.innerHTML = ''; // Limpiar solo la lista de géneros
+        
+        generos.forEach(genero => {
+            const botonGenero = document.createElement('button');
+            botonGenero.className = 'genero-btn';
+            botonGenero.textContent = genero;
+            botonGenero.dataset.genero = genero;
+            listaGeneros.appendChild(botonGenero);
+        });
+        
+        // No limpiar las series
+        // this.contenedorSeries.innerHTML = '';
+    }
+
+    // Modificar el método mostrarPlataformas
+    mostrarPlataformas(plataformas) {
+        // Verificar si ya existe el contenedor de plataformas
+        let contenedorPlataformas = document.querySelector('.plataformas-container');
+        
+        if (!contenedorPlataformas) {
+            contenedorPlataformas = document.createElement('div');
+            contenedorPlataformas.className = 'plataformas-container';
+            contenedorPlataformas.innerHTML = '<h3 class="section-title">🎬 Plataformas</h3>';
+            
+            const listaPlataformas = document.createElement('div');
+            listaPlataformas.className = 'plataformas-lista';
+            contenedorPlataformas.appendChild(listaPlataformas);
+            
+            // Insertar antes del contenedor de series
+            this.contenedorSeries.parentElement.insertBefore(contenedorPlataformas, this.contenedorSeries);
+        }
+        
+        // Actualizar la lista de plataformas
+        const listaPlataformas = contenedorPlataformas.querySelector('.plataformas-lista');
+        listaPlataformas.innerHTML = '';
+        
+        plataformas.forEach(plataforma => {
+            const botonPlataforma = document.createElement('button');
+            botonPlataforma.className = 'plataforma-btn';
+            botonPlataforma.textContent = plataforma;
+            botonPlataforma.dataset.plataforma = plataforma;
+            listaPlataformas.appendChild(botonPlataforma);
+        });
+    }
+
+    // Mostrar serie recomendada
+    mostrarSerieRecomendada(serie) {
+        const modalRecomendacion = document.createElement('div');
+        modalRecomendacion.id = 'recomendacion-modal';
+        modalRecomendacion.className = 'modal';
+        
+        modalRecomendacion.innerHTML = `
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>✨ Te recomendamos</h2>
+                <div class="serie-recomendada">
+                    <img src="${serie.image}" alt="${serie.title}" class="serie-image">
+                    <h3>${serie.title}</h3>
+                    <p><strong>Plataforma:</strong> ${serie.platform}</p>
+                    <p><strong>Género:</strong> ${serie.genre}</p>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modalRecomendacion);
+        modalRecomendacion.style.display = 'flex';
+        
+        modalRecomendacion.querySelector('.close-btn').addEventListener('click', () => {
+            modalRecomendacion.remove();
+        });
+    }
+
+    // Vincular eventos nuevos
+     vincularMostrarGeneros(manejador) {
+        this.botonGeneros.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            this.botonGeneros.classList.add('active');
+            manejador();
+        });
+    }
+
+    vincularMostrarPlataformas(manejador) {
+        this.botonPlataformas.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            this.botonPlataformas.classList.add('active');
+            manejador();
+        });
+    }
+
+    vincularRecomendarSerie(manejador) {
+        this.botonRecomendar.addEventListener('click', manejador);
+    }
+
+    vincularFiltrarPorGenero(manejador) {
+        document.addEventListener('click', evento => {
+            if (evento.target.classList.contains('genero-btn')) {
+                const genero = evento.target.dataset.genero;
+                manejador(genero);
+            }
+        });
+    }
+
+    vincularFiltrarPorPlataforma(manejador) {
+        document.addEventListener('click', evento => {
+            if (evento.target.classList.contains('plataforma-btn')) {
+                const plataforma = evento.target.dataset.plataforma;
+                manejador(plataforma);
+            }
+        });
+    }
+
+    
+    vincularMostrarInicio(manejador) {
+        this.botonInicio.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            this.botonInicio.classList.add('active');
+            
+            // Eliminar el contenedor de géneros si existe
+            const contenedorGeneros = document.querySelector('.generos-container');
+            if (contenedorGeneros) {
+                contenedorGeneros.remove();
+            }
+            
+            // Eliminar el contenedor de plataformas si existe
+            const contenedorPlataformas = document.querySelector('.plataformas-container');
+            if (contenedorPlataformas) {
+                contenedorPlataformas.remove();
+            }
+            
+            // Restaurar el título original de la sección de series
+            const tituloSeries = this.contenedorSeries.previousElementSibling;
+            if (tituloSeries && tituloSeries.classList.contains('section-title')) {
+                tituloSeries.textContent = '💖 Mis Series Favoritas';
+            }
+            
+            manejador();
+        });
+    }
+
 }
