@@ -7,32 +7,78 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>Mis Series Favoritas</h1>
-        <button id="add-series-btn">Añadir Nueva Serie</button>
+        <div class="header-content">
+            <h1>✨ StreamFem</h1>
+            <nav class="header-nav">
+                <a href="#" class="nav-link active">Inicio</a>
+                <a href="#" class="nav-link">Mi Lista</a>
+                <a href="#" class="nav-link">Explorar</a>
+            </nav>
+            <button id="add-series-btn">+ Añadir Serie</button>
+        </div>
     </header>
 
-    <main id="series-container">
-        <!-- Las series se agregarán aquí dinámicamente -->
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-info">
+                <h2 class="hero-title">Bienvenida a tu colección personal</h2>
+                <p class="hero-description">Descubre y organiza tus series favoritas en un solo lugar. Una experiencia única diseñada especialmente para ti.</p>
+                <div class="hero-buttons">
+                    <button class="hero-btn primary" id="hero-add-btn">▶ Añadir Primera Serie</button>
+                    <button class="hero-btn secondary">ℹ Más Info</button>
+                </div>
+            </div>
+        </div>
+        <div class="hero-gradient"></div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Sección: Mis Series Favoritas -->
+        <section class="series-section">
+            <h3 class="section-title">💖 Mis Series Favoritas</h3>
+            <div class="series-row" id="series-container">
+                <!-- Las series se agregarán aquí dinámicamente -->
+            </div>
+        </section>
+
+        <!-- Sección: Recientemente Agregadas -->
+        <section class="series-section">
+            <h3 class="section-title">🆕 Recientemente Agregadas</h3>
+            <div class="series-row" id="recent-series">
+                <!-- Series recientes -->
+            </div>
+        </section>
+
+        <!-- Sección: Por Plataforma -->
+        <section class="series-section">
+            <h3 class="section-title">🎬 Por Plataforma</h3>
+            <div class="series-row" id="platform-series">
+                <!-- Series por plataforma -->
+            </div>
+        </section>
     </main>
 
     <!-- Modal para añadir/editar series -->
     <div id="series-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h2 id="modal-title">Añadir Nueva Serie</h2>
+            <h2 id="modal-title">✨ Añadir Nueva Serie</h2>
             <form id="series-form">
                 <input type="hidden" id="series-id">
                 <div class="form-group">
-                    <label for="title">Título:</label>
-                    <input type="text" id="title" required>
+                    <label for="title">🎭 Título:</label>
+                    <input type="text" id="title" required placeholder="Nombre de la serie">
                 </div>
                 <div class="form-group">
-                    <label for="image">URL de la imagen:</label>
-                    <input type="url" id="image" required>
+                    <label for="image">🖼️ URL de la imagen:</label>
+                    <input type="url" id="image" required placeholder="https://ejemplo.com/imagen.jpg">
                 </div>
                 <div class="form-group">
-                    <label for="platform">Plataforma:</label>
+                    <label for="platform">📺 Plataforma:</label>
                     <select id="platform" required>
                         <option value="">Selecciona una plataforma</option>
                         <option value="Netflix">Netflix</option>
@@ -44,20 +90,23 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="year">Año de lanzamiento:</label>
-                    <input type="number" id="year" min="1950" max="2025" required>
+                    <label for="year">📅 Año de lanzamiento:</label>
+                    <input type="number" id="year" min="1950" max="2025" required placeholder="2024">
                 </div>
                 <div class="form-group">
-                    <label for="genre">Género:</label>
-                    <input type="text" id="genre" required>
+                    <label for="genre">🎪 Género:</label>
+                    <input type="text" id="genre" required placeholder="Drama, Comedia, Acción...">
                 </div>
-                <div class="form-group">
-                    <label for="isMultiSeason">¿Tiene múltiples temporadas?</label>
-                    <input type="checkbox" id="isMultiSeason">
+                <div class="form-group checkbox-group">
+                    <label for="isMultiSeason">
+                        <input type="checkbox" id="isMultiSeason">
+                        <span class="checkmark"></span>
+                        ¿Tiene múltiples temporadas?
+                    </label>
                 </div>
                 <div class="form-buttons">
                     <button type="button" id="cancel-btn">Cancelar</button>
-                    <button type="submit" id="save-btn">Guardar</button>
+                    <button type="submit" id="save-btn">💾 Guardar</button>
                 </div>
             </form>
         </div>
@@ -66,11 +115,11 @@
     <!-- Modal de confirmación para eliminar -->
     <div id="confirm-modal" class="modal">
         <div class="modal-content confirm">
-            <h2>¿Estás seguro?</h2>
-            <p>Esta acción eliminará la serie permanentemente y no podrá recuperarse.</p>
+            <h2>💔 ¿Estás segura?</h2>
+            <p>Esta acción eliminará la serie permanentemente de tu colección y no podrá recuperarse.</p>
             <div class="confirm-buttons">
                 <button id="confirm-cancel">Cancelar</button>
-                <button id="confirm-delete">Borrar de mi lista</button>
+                <button id="confirm-delete">🗑️ Eliminar</button>
             </div>
         </div>
     </div>
