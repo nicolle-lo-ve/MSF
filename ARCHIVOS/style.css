@@ -625,6 +625,35 @@ button {
     animation-delay: 0.2s;
 }
 
+.generos-container, .plataformas-container {
+    margin-bottom: 2rem;
+    padding: 0 4rem;
+}
+
+.generos-lista, .plataformas-lista {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.genero-btn, .plataforma-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+}
+
+.genero-btn:hover, .plataforma-btn:hover {
+    background: var(--pink-accent);
+    transform: translateY(-2px);
+}
+
 /* Smooth scrolling para toda la página */
 html {
     scroll-behavior: smooth;
