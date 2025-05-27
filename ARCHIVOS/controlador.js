@@ -10,6 +10,12 @@ class ControladorSeries {
         this.vista.vincularEliminarSerie(this.manejarEliminarSerie);
         this.vista.vincularGuardarSerie(this.manejarGuardarSerie);
         this.vista.vincularCancelarModal(this.manejarCancelarModal);
+        this.vista.vincularMostrarGeneros(this.mostrarGeneros);
+        this.vista.vincularMostrarPlataformas(this.mostrarPlataformas);
+        this.vista.vincularRecomendarSerie(this.manejarRecomendarSerie);
+        this.vista.vincularFiltrarPorGenero(this.manejarFiltrarPorGenero);
+        this.vista.vincularFiltrarPorPlataforma(this.manejarFiltrarPorPlataforma);
+        this.vista.vincularMostrarInicio(this.mostrarSeries);
 
         // Mostrar series iniciales
         this.mostrarSeries();
@@ -63,6 +69,40 @@ class ControladorSeries {
     manejarCancelarModal = () => {
         this.vista.ocultarModal();
         this.vista.ocultarModalConfirmacion();
+    }
+
+    // Mostrar géneros
+    mostrarGeneros = () => {
+        const generos = this.modelo.obtenerTodosLosGeneros();
+        this.vista.mostrarGeneros(generos);
+    }
+
+    // Mostrar plataformas
+    mostrarPlataformas = () => {
+        const plataformas = this.modelo.obtenerTodasLasPlataformas();
+        this.vista.mostrarPlataformas(plataformas);
+    }
+
+    // Manejar recomendación de serie
+    manejarRecomendarSerie = () => {
+        const serie = this.modelo.obtenerSerieAleatoria();
+        if (serie) {
+            this.vista.mostrarSerieRecomendada(serie);
+        } else {
+            alert('No hay series para recomendar. ¡Añade algunas primero!');
+        }
+    }
+
+    // Manejar filtrado por género
+    manejarFiltrarPorGenero = (genero) => {
+        const series = this.modelo.obtenerSeriesPorGenero(genero);
+        this.vista.mostrarSeries(series);
+    }
+
+    // Manejar filtrado por plataforma
+    manejarFiltrarPorPlataforma = (plataforma) => {
+        const series = this.modelo.obtenerSeriesPorPlataforma(plataforma);
+        this.vista.mostrarSeries(series);
     }
 }
 
